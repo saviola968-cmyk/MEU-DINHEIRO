@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Meu Dinheiro</title>
+<meta name="description" content="Meu Dinheiro é um controle financeiro pessoal no navegador para organizar contas, lançamentos e importações OFX.">
+<meta name="theme-color" content="#0E1117">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -28,13 +30,87 @@
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0; padding:0; height:100%;}
   body{
-    background:var(--bg);
+    background:
+      radial-gradient(circle at top left, rgba(110,139,255,0.18), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(55,214,166,0.12), transparent 24%),
+      var(--bg);
     color:var(--text);
     font-family:'Inter', -apple-system, sans-serif;
     overscroll-behavior-y:none;
     min-height:100vh;
     display:flex;
     justify-content:center;
+    align-items:center;
+  }
+  .page-shell{
+    width:min(1100px, 100%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:40px;
+    padding:24px;
+  }
+  .site-panel{
+    display:none;
+    flex:1;
+    max-width:460px;
+  }
+  .site-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(110,139,255,0.12);
+    border:1px solid rgba(110,139,255,0.22);
+    color:#B9C7FF;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+  }
+  .site-panel h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(40px, 5vw, 58px);
+    line-height:1.02;
+    letter-spacing:-0.04em;
+    margin:18px 0 16px;
+  }
+  .site-panel p{
+    margin:0;
+    max-width:440px;
+    color:var(--text-dim);
+    font-size:16px;
+    line-height:1.7;
+  }
+  .site-points{
+    display:grid;
+    gap:14px;
+    margin-top:28px;
+  }
+  .site-point{
+    background:rgba(24,29,39,0.76);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:20px;
+    padding:18px 20px;
+    backdrop-filter:blur(18px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.16);
+  }
+  .site-point strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:6px;
+  }
+  .site-point span{
+    color:var(--text-dim);
+    font-size:13px;
+    line-height:1.6;
+  }
+  .app-stage{
+    width:100%;
+    max-width:480px;
+    position:relative;
   }
   #root{
     width:100%;
@@ -390,10 +466,73 @@
     display:inline-block; font-size:12px; color:var(--accent); background:var(--accent-dim);
     padding:5px 10px; border-radius:8px; margin:-6px 0 16px;
   }
+  @media (min-width: 960px){
+    .site-panel{display:block;}
+    #root{
+      min-height:calc(100vh - 48px);
+      max-height:calc(100vh - 48px);
+      background:rgba(14,17,23,0.88);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:0 24px 80px rgba(0,0,0,0.32);
+      backdrop-filter:blur(22px);
+    }
+    #screen-app{position:relative;}
+    nav.bottom{
+      left:auto;
+      right:max(24px, calc((100vw - 1100px) / 2 + 24px));
+      transform:none;
+      width:480px;
+      border-radius:0 0 30px 30px;
+      overflow:hidden;
+    }
+    .sheet{
+      left:auto;
+      right:max(24px, calc((100vw - 1100px) / 2 + 24px));
+      transform:translateY(100%);
+      width:480px;
+      border-radius:30px 30px 0 0;
+    }
+    .sheet.show{transform:translateY(0);}
+    #toast{
+      left:auto;
+      right:max(24px, calc((100vw - 1100px) / 2 + 84px));
+      bottom:120px;
+      transform:translateY(20px);
+      max-width:320px;
+    }
+    #toast.show{transform:translateY(0);}
+  }
+  @media (max-width: 959px){
+    .page-shell{padding:0;}
+  }
 </style>
 </head>
 <body>
-<div id="root">
+<div class="page-shell">
+  <section class="site-panel" aria-label="Apresentação do Meu Dinheiro">
+    <div class="site-badge">Controle financeiro no navegador</div>
+    <h1>Meu Dinheiro agora com cara de site.</h1>
+    <p>Organize contas, acompanhe entradas e saídas, importe OFX e mantenha seu histórico salvo direto no navegador sem complicação.</p>
+    <div class="site-points">
+      <div class="site-point">
+        <strong>Visão clara do mês</strong>
+        <span>Veja saldo total, receitas, despesas, categorias e maiores gastos em uma única tela.</span>
+      </div>
+      <div class="site-point">
+        <strong>Contas e lançamentos em um só lugar</strong>
+        <span>Cadastre contas, acompanhe movimentações e filtre tudo com uma navegação simples.</span>
+      </div>
+      <div class="site-point">
+        <strong>Backup e importação</strong>
+        <span>Restaure seus dados quando quiser e aproveite a leitura de extratos OFX para ganhar tempo.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="app-stage">
+  <div id="root">
 
   <!-- Loading -->
   <div id="screen-loading">
@@ -549,6 +688,8 @@
     </nav>
   </div>
 
+  </div>
+</div>
 </div>
 
 <!-- Sheets -->
